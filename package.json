@@ -9,7 +9,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "lint": "eslint --ignore-path .gitignore --fix src",
+    "lint": "eslint --ignore-path .gitignore --fix src cdk",
     "prettier": "prettier src --write",
     "cdk": "cdk",
     "synth": "cdk synth",
