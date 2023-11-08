@@ -11,11 +11,10 @@
     "test:coverage": "vitest run --coverage",
     "lint": "eslint --ignore-path .gitignore --fix src cdk",
     "prettier": "prettier src --write",
-    "cdk": "cdk",
     "synth": "cdk synth",
     "bootstrap": "cdk bootstrap",
     "deploy": "cdk deploy",
-    "watch": "cdk watch"
+    "update:deploy": "npm run build && cdk deploy"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",

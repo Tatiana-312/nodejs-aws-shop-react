@@ -52,6 +52,7 @@ export class CdkStack extends Stack {
         ],
       }
     );
+
     new BucketDeployment(this, "MyShop-Bucket-Deployment", {
       sources: [Source.asset("./dist")],
       destinationBucket: bucket,
