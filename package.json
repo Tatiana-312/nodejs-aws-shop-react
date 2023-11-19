@@ -14,7 +14,7 @@
     "synth": "cdk synth",
     "bootstrap": "cdk bootstrap",
     "deploy": "cdk deploy",
-    "update:deploy": "npm run build && cdk deploy"
+    "deploy:update": "npm run build && cdk deploy"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
