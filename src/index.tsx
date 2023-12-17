@@ -11,13 +11,20 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
+const errorMessage = {
+  "401": "Authorization header is not provided",
+  "403": "Invalid Authorization Token",
+};
+
 axios.interceptors.response.use(
   (response) => {
     return response;
   },
   (error) => {
-    if (error.response.status === 401 || error.response.status === 403) {
-      toast(error.message);
+    const statusCode: number = error.response.status;
+
+    if (statusCode === 401 || statusCode === 403) {
+      toast(`${errorMessage[statusCode]}, Status Code: ${statusCode}`);
     }
     return Promise.reject(error);
   }
