@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import { useCart, useInvalidateCart } from "~/queries/cart";
 import AddressForm from "~/components/pages/PageCart/components/AddressForm";
 import { useSubmitOrder } from "~/queries/orders";
+import { CartItem } from "~/models/CartItem";
 
 enum CartStep {
   ReviewCart,
@@ -51,7 +52,9 @@ export default function PageCart() {
   );
   const [address, setAddress] = useState<Address>(initialAddressValues);
 
-  const isCartEmpty = data.length === 0;
+  const itemsData: CartItem[] = data.data.cart.items;
+
+  const isCartEmpty = itemsData.length === 0;
 
   const handleNext = () => {
     if (activeStep !== CartStep.ReviewOrder) {
@@ -59,7 +62,7 @@ export default function PageCart() {
       return;
     }
     const values = {
-      items: data.map((i) => ({
+      items: itemsData.map((i: CartItem) => ({
         productId: i.product.id,
         count: i.count,
       })),
@@ -100,7 +103,7 @@ export default function PageCart() {
       </Stepper>
       {isCartEmpty && <CartIsEmpty />}
       {!isCartEmpty && activeStep === CartStep.ReviewCart && (
-        <ReviewCart items={data} />
+        <ReviewCart items={itemsData} />
       )}
       {activeStep === CartStep.Address && (
         <AddressForm
@@ -110,7 +113,7 @@ export default function PageCart() {
         />
       )}
       {activeStep === CartStep.ReviewOrder && (
-        <ReviewOrder address={address} items={data} />
+        <ReviewOrder address={address} items={itemsData} />
       )}
       {activeStep === CartStep.Success && <Success />}
       {!isCartEmpty &&
